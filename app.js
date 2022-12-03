@@ -1,9 +1,7 @@
 function getDiceRollArray(diceCount) {
-  const newDiceRolls = [];
-  for (let i = 0; i < diceCount; i++) {
-    newDiceRolls.push(Math.floor(Math.random() * 6) + 1);
-  }
-  return newDiceRolls;
+  return new Array(diceCount).fill(0).map(() => {
+    return Math.floor(Math.random() * 6) + 1;
+  });
 }
 
 function getDiceHtml(diceCount) {
@@ -30,12 +28,18 @@ const monster = {
   diceCount: 1,
 };
 
-function renderCharacter(data) {
-  const { elementId, name, avatar, health, diceCount } = data;
+function Character(data) {
+  this.elementId = data.elementId;
+  this.name = data.name;
+  this.avatar = data.avatar;
+  this.health = data.health;
+  this.diceCount = data.diceCount;
 
-  const diceHtml = getDiceHtml(diceCount);
-
-  document.getElementById(elementId).innerHTML = `
+  this.getCharacterHtml = () => {
+    const { elementId, name, avatar, health, diceCount } = this;
+    const diceHtml = getDiceHtml(diceCount);
+    
+    document.getElementById(elementId).innerHTML = `
     <div class="character-card">
       <h4 class="name">${name}</h4>
       <img class="avatar" src="${avatar}"/>
@@ -45,6 +49,30 @@ function renderCharacter(data) {
       </div>
     </div> 
   `;
+  };
 }
-renderCharacter(hero);
-renderCharacter(monster);
+
+const wizard = new Character(hero);
+const orc = new Character(monster);
+
+wizard.getCharacterHtml();
+orc.getCharacterHtml();
+
+// function renderCharacter(data) {
+//   const { elementId, name, avatar, health, diceCount } = data;
+
+//   const diceHtml = getDiceHtml(diceCount);
+
+//   document.getElementById(elementId).innerHTML = `
+//     <div class="character-card">
+//       <h4 class="name">${name}</h4>
+//       <img class="avatar" src="${avatar}"/>
+//       <div class="health">health: <b> ${health} </b></div>
+//       <div class="dice-container">
+//         ${diceHtml}
+//       </div>
+//     </div>
+//   `;
+// }
+// renderCharacter(hero);
+// renderCharacter(monster);
