@@ -1,31 +1,33 @@
 import { getDiceRollArray } from "./utils.js";
 
-function Character(data) {
-  Object.assign(this, data);
+class Character {
+  constructor(data) {
+    Object.assign(this, data);
 
-  this.getDiceHtml = (diceCount) => {
-    return getDiceRollArray(diceCount)
-      .map(function (num) {
-        return `<div class="dice">${num}</div>`;
-      })
-      .join("");
-  };
+    this.getDiceHtml = (diceCount) => {
+      return getDiceRollArray(diceCount)
+        .map(function (num) {
+          return `<div class="dice">${num}</div>`;
+        })
+        .join("");
+    };
 
-  this.getCharacterHtml = () => {
-    const { name, avatar, health, diceCount } = this;
-    let diceHtml = this.getDiceHtml(diceCount);
+    this.getCharacterHtml = () => {
+      const { name, avatar, health, diceCount } = this;
+      let diceHtml = this.getDiceHtml(diceCount);
 
-    return `
-    <div class="character-card">
-      <h4 class="name">${name}</h4>
-      <img class="avatar" src="${avatar}"/>
-      <div class="health">health: <b> ${health} </b></div>
-      <div class="dice-container">
-        ${diceHtml}
-      </div>
-    </div> 
-  `;
-  };
+      return `
+      <div class="character-card">
+        <h4 class="name">${name}</h4>
+        <img class="avatar" src="${avatar}"/>
+        <div class="health">health: <b> ${health} </b></div>
+        <div class="dice-container">
+          ${diceHtml}
+        </div>
+      </div> 
+    `;
+    };
+  }
 }
 
 export default Character;
