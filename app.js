@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import characterData from "./data.js";
 import Character from "./Character.js";
 
@@ -6,7 +7,28 @@ function attack() {
   orc.getDiceHtml();
   wizard.takeDamage(orc.currentDiceScore);
   orc.takeDamage(wizard.currentDiceScore);
+
+  if (wizard.dead || orc.dead) {
+    endGame();
+  }
   render();
+}
+
+function endGame() {
+  const endMessage =
+    wizard.health === 0 && orc.health === 0
+      ? "No victors -- all creatures are dead"
+      : wizard.health > 0
+      ? "The Wizard wins!"
+      : "The Orc is victorius!";
+
+  const endEmoji = wizard.health > 0 ? "🔮" : "☠️";
+
+  document.body.innerHTML = `<div class="end-game">
+    <h2>Game Over</h2>
+    <h3>${endMessage}<h3>
+    <p class="end-emoji">${endEmoji}</p>
+  </div>`;
 }
 
 function render() {
