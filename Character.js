@@ -9,19 +9,13 @@ class Character {
     this.getDiceHtml = () => {
       this.currentDiceScore = getDiceRollArray(this.diceCount);
       this.diceArray = this.currentDiceScore
-        .map((num) => {
-          return `
-          <div class="dice">${num}</div>
-        `;
-        })
+        .map((num) => `<div class="dice">${num}</div>`)
         .join("");
     };
 
     this.takeDamage = (attackScoreArray) => {
       const totalAttackScore = attackScoreArray.reduce(
-        (totalHealth, currentHealth) => {
-          return totalHealth + currentHealth;
-        }
+        (totalHealth, currentHealth) => totalHealth + currentHealth
       );
       this.health -= totalAttackScore;
       if (this.health <= 0) {

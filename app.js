@@ -2,7 +2,7 @@
 import characterData from "./data.js";
 import Character from "./Character.js";
 
-function attack() {
+const attack = () => {
   wizard.getDiceHtml();
   orc.getDiceHtml();
   wizard.takeDamage(orc.currentDiceScore);
@@ -12,9 +12,9 @@ function attack() {
     endGame();
   }
   render();
-}
+};
 
-function endGame() {
+const endGame = () => {
   const endMessage =
     wizard.health === 0 && orc.health === 0
       ? "No victors -- all creatures are dead"
@@ -29,12 +29,12 @@ function endGame() {
     <h3>${endMessage}<h3>
     <p class="end-emoji">${endEmoji}</p>
   </div>`;
-}
+};
 
-function render() {
+const render = () => {
   document.getElementById("hero").innerHTML = wizard.getCharacterHtml();
   document.getElementById("monster").innerHTML = orc.getCharacterHtml();
-}
+};
 
 document.getElementById("attack-button").addEventListener("click", attack);
 const wizard = new Character(characterData.hero);
