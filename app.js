@@ -16,6 +16,7 @@ const attack = () => {
     monster.setDiceHtml();
     wizard.takeDamage(monster.currentDiceScore);
     monster.takeDamage(wizard.currentDiceScore);
+    render();
 
     if (wizard.dead) {
       endGame();
