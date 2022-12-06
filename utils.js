@@ -4,6 +4,10 @@ const getDiceRollArray = (diceCount) => {
   });
 };
 
+const getPercentage = (remainingHealth, maximumHealth) => {
+  return (100 * remainingHealth) / maximumHealth;
+};
+
 const getDicePlaceholderHtml = (diceCount) => {
   return new Array(diceCount)
     .fill(0)
@@ -13,10 +17,6 @@ const getDicePlaceholderHtml = (diceCount) => {
     `;
     })
     .join("");
-};
-
-const getPercentage = (remainingHealth, maximumHealth) => {
-  return (100 * remainingHealth) / maximumHealth;
 };
 
 export { getDiceRollArray, getDicePlaceholderHtml, getPercentage };

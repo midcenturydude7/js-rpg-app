@@ -8,11 +8,11 @@ class Character {
   constructor(data) {
     Object.assign(this, data);
     this.maxHealth = this.health;
-    this.diceArray = getDicePlaceholderHtml(this.diceCount);
+    this.diceHtml = getDicePlaceholderHtml(this.diceCount);
 
-    this.getDiceHtml = () => {
+    this.setDiceHtml = () => {
       this.currentDiceScore = getDiceRollArray(this.diceCount);
-      this.diceArray = this.currentDiceScore
+      this.diceHtml = this.currentDiceScore
         .map((num) => `<div class="dice">${num}</div>`)
         .join("");
     };
@@ -30,7 +30,7 @@ class Character {
 
     this.getHealthBarHtml = () => {
       const percent = getPercentage(this.health, this.maxHealth);
-      
+
       return `
       <div class="health-bar-outer">
           <div class="health-bar-inner ${percent < 26 ? "danger" : ""} " 
@@ -40,9 +40,9 @@ class Character {
     };
 
     this.getCharacterHtml = () => {
-      const { name, avatar, health } = this;
+      const { name, avatar, health, diceHtml } = this;
       const healthBar = this.getHealthBarHtml();
-      
+
       return `
       <div class="character-card">
         <h4 class="name">${name}</h4>
@@ -50,7 +50,7 @@ class Character {
         <div class="health">health: <b> ${health} </b></div>
         ${healthBar}
         <div class="dice-container">
-          ${this.diceArray}
+          ${diceHtml}
         </div>
       </div> 
     `;
